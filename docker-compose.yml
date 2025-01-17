@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  nuxt:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - laravel
+    networks:
+      - app_network
+
+  laravel:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - APP_ENV=local
+      - APP_KEY=base64:random_key
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
