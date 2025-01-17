@@ -3,7 +3,7 @@ version: '3.8'
 services:
   nuxt:
     build:
-      context: ./frontend
+      context: ./Frontend
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
@@ -16,18 +16,17 @@ services:
       - laravel
     networks:
       - app_network
-
   laravel:
+    restart: unless-stopped
+    container_name: laravel
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: ./Backend
+      dockerfile: ./Dockerfile
+
+    volumes:
+      - ../storage/app:/var/www/html/storage/app
     ports:
       - "8000:8000"
-    volumes:
-      - ./backend:/app
-    environment:
-      - APP_ENV=local
-      - APP_KEY=base64:random_key
     networks:
       - app_network
 
