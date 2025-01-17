@@ -109,6 +109,12 @@ Para levantar el backend se debe tener instalado y configurado:
 
 En la raíz del proyecto Backend y en la consola ejecutar: ```composer install```. Una vez instaladas las dependencias del proyecto, ejecutar el siguiente comando:
 
+```php artisan migrate```
+
+Solicitará crear una base de datos, escriben YES e ingresan.
+
+Luego, para ejecutar el servidor, se ingresa el siguiente comando:
+
 ```php artisan serve```
 
 Se ejecutará el servidor del backend y estará listo para su funcionamiento.
